@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nehuen Mesias | Fullstack Developer Portfolio
 
-## Getting Started
+Portafolio personal diseñado para destacar arquitectura robusta, código limpio y rendimiento óptimo. Construido con un enfoque en la escalabilidad y la experiencia de usuario.
 
-First, run the development server:
+## Tech Stack del Portafolio
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Este proyecto fue desarrollado utilizando tecnologías modernas para garantizar un despliegue rápido y animaciones fluidas:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Estilos:** [Tailwind CSS](https://tailwindcss.com/)
+- **Animaciones:** [Framer Motion](https://www.framer.com/motion/)
+- **Iconos:** [Lucide React](https://lucide.dev/)
+- **Lenguaje:** TypeScript
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Mi Perfil
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Soy Tecnico en Programacion y Co-fundador de **Light & Code**. Me especializo en el ecosistema **MERN** (MySQL/MongoDB, Express, React, Node.js).
+Mi enfoque principal es ser el puente perfecto entre un diseño de producto excepcional (UI/UX) y una arquitectura de servidor robusta y escalable.
 
-## Learn More
+_Base de operaciones: Ushuaia, Tierra del Fuego, Argentina._
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Despliegue Local
