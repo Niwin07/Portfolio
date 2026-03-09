@@ -126,7 +126,7 @@ export default function Hero() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mt-16 sm:mt-20 relative z-10 gap-10">
         <div className="max-w-3xl">
           <p className="text-base sm:text-lg font-medium mb-3 sm:mb-4 text-white/60">
-            Ingeniería de Software
+            Desarrollador
           </p>
           <h1 className="text-6xl sm:text-8xl lg:text-[120px] leading-[1] sm:leading-[0.9] font-extrabold tracking-tighter">
             Fullstack
