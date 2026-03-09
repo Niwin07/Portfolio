@@ -85,7 +85,7 @@ export default function Stack() {
       >
         <Terminal className="w-4 h-4 text-[#8b5cf6]" />
         <span className="text-xs font-mono text-white/30 tracking-[0.2em] uppercase">
-          stack.tech
+          tecnologias.stack
         </span>
         <div className="flex-1 h-px bg-white/5" />
       </motion.div>

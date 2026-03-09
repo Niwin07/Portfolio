@@ -98,11 +98,6 @@ export default function Hero() {
       <div className="absolute top-[-80px] right-[-80px] w-[500px] h-[500px] bg-[#8b5cf6] opacity-[0.12] blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[10%] left-[-100px] w-[350px] h-[350px] bg-[#6d28d9] opacity-[0.08] blur-[100px] rounded-full pointer-events-none" />
 
-      {/* Decorative corner numbers */}
-      <div className="absolute top-6 right-6 text-[10px] font-mono text-white/15 tracking-[0.2em] hidden sm:block">
-        SYS:ONLINE · v2.0.26
-      </div>
-
       {/* NAVBAR */}
       <nav className="flex items-center justify-between relative z-50 px-6 sm:px-10 pt-6 sm:pt-8">
         <motion.div
@@ -210,11 +205,11 @@ export default function Hero() {
 
           {/* Headline */}
           <h1 className="font-black tracking-tighter leading-[0.88] mb-6">
-            <div className="text-[clamp(3.5rem,10vw,9rem)] text-white">
+            <div className="text-[clamp(2.8rem,8vw,9rem)] text-white">
               Fullstack
             </div>
             <div
-              className="text-[clamp(3.5rem,10vw,9rem)]"
+              className="text-[clamp(2.8rem,8vw,9rem)]"
               style={{
                 WebkitTextStroke: "2px rgba(139,92,246,0.6)",
                 color: "transparent",

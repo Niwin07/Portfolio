@@ -48,7 +48,7 @@ export default function About() {
       <motion.div variants={fadeUp} className="flex items-center gap-3 mb-12">
         <Terminal className="w-4 h-4 text-[#8b5cf6]" />
         <span className="text-xs font-mono text-white/30 tracking-[0.2em] uppercase">
-          about.profile
+          perfil.sobre
         </span>
         <div className="flex-1 h-px bg-white/5" />
       </motion.div>
