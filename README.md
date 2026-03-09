@@ -18,5 +18,3 @@ Soy Tecnico en Programacion y Co-fundador de **Light & Code**. Me especializo en
 Mi enfoque principal es ser el puente perfecto entre un diseño de producto excepcional (UI/UX) y una arquitectura de servidor robusta y escalable.
 
 _Base de operaciones: Ushuaia, Tierra del Fuego, Argentina._
-
-## Despliegue Local
