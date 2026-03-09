@@ -18,7 +18,7 @@ export default function Footer() {
           <Github className="w-4 h-4" /> GitHub
         </a>
         <a
-          href="www.linkedin.com/in/henry-nehuen-mesias-rios-41a756297"
+          href="https://www.linkedin.com/in/henry-nehuen-mesias-rios-41a756297/"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 hover:text-[#c084fc] transition-colors"
