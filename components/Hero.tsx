@@ -128,7 +128,7 @@ export default function Hero() {
           <p className="text-base sm:text-lg font-medium mb-3 sm:mb-4 text-white/60">
             Desarrollador
           </p>
-          <h1 className="text-6xl sm:text-8xl lg:text-[120px] leading-[1] sm:leading-[0.9] font-extrabold tracking-tighter">
+          <h1 className="text-5xl min-[400px]:text-6xl sm:text-7xl lg:text-[120px] leading-[1.1] sm:leading-[0.9] font-extrabold tracking-tighter">
             Fullstack
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8b5cf6] to-[#c084fc]">
