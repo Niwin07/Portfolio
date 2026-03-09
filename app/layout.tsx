@@ -1,20 +1,47 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Portafolio",
-  description: "Portafolio de Nehuen Mesias",
+  title: "Nehuen Mesias | Fullstack Developer",
+  description:
+    "Tecnico en Programacion y Co-fundador de Light & Code. Especializado en el stack MERN construyendo sistemas robustos desde Ushuaia.",
+  keywords: [
+    "Fullstack",
+    "Developer",
+    "MERN",
+    "React",
+    "Node.js",
+    "Desarrollador de Software",
+    "Ushuaia",
+    "Nehuen Mesias",
+  ],
+  openGraph: {
+    title: "Nehuen Mesias | Fullstack Developer",
+    description:
+      "Especializado en el stack MERN. Construyendo sistemas robustos y escalables desde el Fin del Mundo.",
+    // REEMPLAZA ESTO CON TU LINK REAL DE VERCEL 👇
+    url: "https://portfolio-nehuen-mesias.vercel.app",
+    siteName: "Nehuen Mesias Portfolio",
+    images: [
+      {
+        url: "/og-image.jpg", // Esta es la imagen que pusiste en la carpeta public
+        width: 1200,
+        height: 630,
+        alt: "Nehuen Mesias - Fullstack Developer Portfolio",
+      },
+    ],
+    locale: "es_AR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nehuen Mesias | Fullstack Developer",
+    description: "Tecnico en Programacion especializado en el stack MERN.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
@@ -23,12 +50,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="es" className="scroll-smooth">
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
