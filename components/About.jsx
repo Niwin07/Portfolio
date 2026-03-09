@@ -49,7 +49,7 @@ export default function About() {
               Tecnico en Programacion
             </h3>
             <p className="text-sm text-white/50">
-              C.TP.O.B.A. Formación sólida en algoritmos y sistemas.
+              C.T.P.O.B.A. Formación sólida en algoritmos y sistemas.
             </p>
           </div>
 
