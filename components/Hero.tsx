@@ -1,11 +1,39 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Server, Database, Terminal, Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
+import {
+  Code2,
+  Server,
+  Database,
+  Terminal,
+  Menu,
+  X,
+  ArrowDown,
+} from "lucide-react";
 
 export default function Hero() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      setMousePos({
+        x: ((e.clientX - rect.left) / rect.width) * 100,
+        y: ((e.clientY - rect.top) / rect.height) * 100,
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
@@ -13,108 +41,151 @@ export default function Hero() {
     const targetId = href.replace(/.*\#/, "");
     const elem = document.getElementById(targetId);
     elem?.scrollIntoView({ behavior: "smooth" });
-    setIsMobileMenuOpen(false); // Cierra el menú en celular al hacer clic
+    setIsMobileMenuOpen(false);
   };
+
+  const navLinks = [
+    { href: "#home", label: "Inicio" },
+    { href: "#about", label: "Sobre Mí" },
+    { href: "#projects", label: "Proyectos" },
+  ];
+
+  const specs = [
+    {
+      icon: <Code2 className="w-4 h-4" />,
+      label: "Frontend",
+      sub: "React · Next.js",
+    },
+    {
+      icon: <Server className="w-4 h-4" />,
+      label: "Backend",
+      sub: "Node.js · Express",
+    },
+    {
+      icon: <Database className="w-4 h-4" />,
+      label: "Bases de Datos",
+      sub: "MySQL · Relacional",
+    },
+    {
+      icon: <Terminal className="w-4 h-4" />,
+      label: "Versatilidad",
+      sub: "Java · Python · PHP",
+    },
+  ];
 
   return (
     <motion.section
+      ref={heroRef}
       id="home"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative w-full rounded-[2rem] sm:rounded-[2.5rem] bg-[#111111] border border-white/5 p-6 sm:p-12 overflow-hidden flex flex-col justify-between min-h-[85vh] shadow-2xl"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="relative w-full rounded-[2rem] bg-[#0d0d0d] border border-white/8 overflow-hidden flex flex-col min-h-[92vh] shadow-2xl"
+      style={{
+        background: `radial-gradient(ellipse at ${mousePos.x}% ${mousePos.y}%, rgba(139,92,246,0.08) 0%, transparent 60%), #0d0d0d`,
+      }}
     >
-      <div className="absolute top-0 right-0 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-[#8b5cf6] opacity-20 blur-[100px] sm:blur-[130px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+      {/* Grid overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.025]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Orbs */}
+      <div className="absolute top-[-80px] right-[-80px] w-[500px] h-[500px] bg-[#8b5cf6] opacity-[0.12] blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[-100px] w-[350px] h-[350px] bg-[#6d28d9] opacity-[0.08] blur-[100px] rounded-full pointer-events-none" />
+
+      {/* Decorative corner numbers */}
+      <div className="absolute top-6 right-6 text-[10px] font-mono text-white/15 tracking-[0.2em] hidden sm:block">
+        SYS:ONLINE · v2.0.26
+      </div>
 
       {/* NAVBAR */}
-      <nav className="flex items-center justify-between relative z-50">
-        <div className="text-xl font-bold tracking-tight flex items-center gap-2">
-          <div className="w-6 h-6 bg-gradient-to-br from-[#8b5cf6] to-[#d946ef] rounded-md"></div>
-          Nehuen Mesias
-        </div>
-
-        {/* Links Desktop */}
-        <div className="hidden md:flex gap-8 text-sm font-medium text-white/60">
-          <a
-            href="#home"
-            onClick={handleScroll}
-            className="hover:text-white transition-colors cursor-pointer"
-          >
-            Inicio
-          </a>
-          <a
-            href="#about"
-            onClick={handleScroll}
-            className="hover:text-white transition-colors cursor-pointer"
-          >
-            Sobre Mí
-          </a>
-          <a
-            href="#projects"
-            onClick={handleScroll}
-            className="hover:text-white transition-colors cursor-pointer"
-          >
-            Proyectos
-          </a>
-        </div>
-
-        {/* Botón Contactar Desktop */}
-        <a
-          href="#contact"
-          onClick={handleScroll}
-          className="hidden md:inline-flex bg-[#8b5cf6] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#7c3aed] transition-colors shadow-[0_0_20px_rgba(139,92,246,0.3)] cursor-pointer"
+      <nav className="flex items-center justify-between relative z-50 px-6 sm:px-10 pt-6 sm:pt-8">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+          className="flex items-center gap-2.5"
         >
-          Contactar
-        </a>
+          <div className="w-8 h-8 bg-gradient-to-br from-[#8b5cf6] to-[#d946ef] rounded-lg flex items-center justify-center">
+            <div className="w-2 h-2 bg-white rounded-sm" />
+          </div>
+          <span className="text-base font-bold tracking-tight">N.Mesias</span>
+        </motion.div>
 
-        {/* Botón Menú Mobile */}
-        <button
-          className="md:hidden p-2 text-white/80 hover:text-white"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        {/* Desktop nav */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="hidden md:flex items-center gap-1 bg-white/5 border border-white/8 rounded-full px-2 py-1.5"
         >
-          {isMobileMenuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <Menu className="w-6 h-6" />
-          )}
-        </button>
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={handleScroll}
+              className="px-4 py-1.5 text-sm text-white/60 hover:text-white hover:bg-white/8 rounded-full transition-all"
+            >
+              {link.label}
+            </a>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+          className="flex items-center gap-3"
+        >
+          <a
+            href="#contact"
+            onClick={handleScroll}
+            className="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white px-5 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity shadow-[0_0_25px_rgba(139,92,246,0.35)]"
+          >
+            Contactar
+          </a>
+          <button
+            className="md:hidden p-2 text-white/70 hover:text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
+          </button>
+        </motion.div>
       </nav>
 
-      {/* MENÚ DESPLEGABLE MOBILE */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-20 left-4 right-4 bg-[#1a1a1a] border border-white/10 rounded-2xl p-6 flex flex-col gap-4 z-50 shadow-2xl md:hidden"
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-20 left-4 right-4 bg-[#141414] border border-white/10 rounded-2xl p-5 flex flex-col gap-3 z-50 shadow-2xl md:hidden"
           >
-            <a
-              href="#home"
-              onClick={handleScroll}
-              className="text-lg font-medium text-white/80 hover:text-white"
-            >
-              Inicio
-            </a>
-            <a
-              href="#about"
-              onClick={handleScroll}
-              className="text-lg font-medium text-white/80 hover:text-white"
-            >
-              Sobre Mí
-            </a>
-            <a
-              href="#projects"
-              onClick={handleScroll}
-              className="text-lg font-medium text-white/80 hover:text-white"
-            >
-              Proyectos
-            </a>
-            <hr className="border-white/5 my-2" />
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={handleScroll}
+                className="text-base font-medium text-white/70 hover:text-white py-1"
+              >
+                {link.label}
+              </a>
+            ))}
+            <hr className="border-white/5 my-1" />
             <a
               href="#contact"
               onClick={handleScroll}
-              className="text-center bg-[#8b5cf6] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#7c3aed] transition-colors"
+              className="text-center bg-[#8b5cf6] text-white px-6 py-2.5 rounded-full text-sm font-semibold"
             >
               Contactar
             </a>
@@ -122,102 +193,90 @@ export default function Hero() {
         )}
       </AnimatePresence>
 
-      {/* CONTENIDO PRINCIPAL */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mt-16 sm:mt-20 relative z-10 gap-10">
-        <div className="max-w-3xl">
-          <p className="text-base sm:text-lg font-medium mb-3 sm:mb-4 text-white/60">
-            Desarrollador
-          </p>
-          <h1 className="text-5xl min-[400px]:text-6xl sm:text-7xl lg:text-[120px] leading-[1.1] sm:leading-[0.9] font-extrabold tracking-tighter">
-            Fullstack
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8b5cf6] to-[#c084fc]">
-              Developer
+      {/* MAIN CONTENT */}
+      <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 pt-10 pb-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-[#8b5cf6]/10 border border-[#8b5cf6]/25 rounded-full px-4 py-1.5 mb-8">
+            <div className="w-1.5 h-1.5 bg-[#a78bfa] rounded-full animate-pulse" />
+            <span className="text-xs font-medium text-[#c084fc] tracking-wide">
+              Disponible para proyectos
             </span>
-          </h1>
-        </div>
+          </div>
 
-        <div className="max-w-xs md:pb-6">
-          <h2 className="text-xl sm:text-2xl font-bold mb-3">
-            Sistemas <span className="text-[#c084fc]">Robustos</span>
-          </h2>
-          <p className="text-sm text-white/60 leading-relaxed">
-            Creando soluciones eficientes y con un impacto verdadero.
-            Especializado en el stack MERN para construir arquitecturas
-            escalables.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href="#projects"
-              onClick={handleScroll}
-              className="bg-[#8b5cf6] px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#7c3aed] transition-all shadow-[0_0_15px_rgba(139,92,246,0.4)] cursor-pointer"
+          {/* Headline */}
+          <h1 className="font-black tracking-tighter leading-[0.88] mb-6">
+            <div className="text-[clamp(3.5rem,10vw,9rem)] text-white">
+              Fullstack
+            </div>
+            <div
+              className="text-[clamp(3.5rem,10vw,9rem)]"
+              style={{
+                WebkitTextStroke: "2px rgba(139,92,246,0.6)",
+                color: "transparent",
+              }}
             >
-              Ver Proyectos
-            </a>
-          </div>
-        </div>
-      </div>
+              Developer
+            </div>
+          </h1>
 
-      {/* ESPECIALIDADES */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 sm:mt-24 border-t border-white/10 pt-8 relative z-10">
-        <motion.div
-          whileHover={{ y: -5 }}
-          className="transition-all flex items-start sm:block gap-4 sm:gap-0"
-        >
-          <div className="w-10 h-10 shrink-0 rounded-full bg-[#8b5cf6]/10 flex items-center justify-center sm:mb-3 border border-[#8b5cf6]/20">
-            <Code2 className="w-4 h-4 text-[#c084fc]" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold">Frontend</p>
-            <p className="text-xs text-white/50 mt-1">
-              React, Next.js, Integración UI
+          {/* Sub row */}
+          <div className="flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-12 mt-8">
+            <p className="text-white/50 text-base sm:text-lg leading-relaxed max-w-md">
+              Arquitecto de sistemas MERN. Construyo soluciones escalables desde{" "}
+              <span className="text-white/80">Ushuaia</span> para el mundo.
             </p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ y: -5 }}
-          className="transition-all flex items-start sm:block gap-4 sm:gap-0"
-        >
-          <div className="w-10 h-10 shrink-0 rounded-full bg-[#8b5cf6]/10 flex items-center justify-center sm:mb-3 border border-[#8b5cf6]/20">
-            <Server className="w-4 h-4 text-[#c084fc]" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold">Backend</p>
-            <p className="text-xs text-white/50 mt-1">
-              Node.js, Express, APIs REST
-            </p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ y: -5 }}
-          className="transition-all flex items-start sm:block gap-4 sm:gap-0"
-        >
-          <div className="w-10 h-10 shrink-0 rounded-full bg-[#8b5cf6]/10 flex items-center justify-center sm:mb-3 border border-[#8b5cf6]/20">
-            <Database className="w-4 h-4 text-[#c084fc]" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold">Bases de Datos</p>
-            <p className="text-xs text-white/50 mt-1">
-              MySQL, Modelado Relacional
-            </p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ y: -5 }}
-          className="transition-all flex items-start sm:block gap-4 sm:gap-0"
-        >
-          <div className="w-10 h-10 shrink-0 rounded-full bg-[#8b5cf6]/10 flex items-center justify-center sm:mb-3 border border-[#8b5cf6]/20">
-            <Terminal className="w-4 h-4 text-[#c084fc]" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold">Versatilidad</p>
-            <p className="text-xs text-white/50 mt-1">Java, Python, PHP</p>
+            <div className="flex gap-3 flex-shrink-0">
+              <a
+                href="#projects"
+                onClick={handleScroll}
+                className="bg-[#8b5cf6] px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#7c3aed] transition-all shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+              >
+                Ver Proyectos
+              </a>
+              <a
+                href="#about"
+                onClick={handleScroll}
+                className="px-6 py-2.5 rounded-full text-sm font-semibold border border-white/12 text-white/60 hover:text-white hover:border-white/25 transition-all"
+              >
+                Sobre Mí
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>
+
+      {/* SPECS BAR */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="grid grid-cols-2 lg:grid-cols-4 border-t border-white/8 relative z-10"
+      >
+        {specs.map((spec, i) => (
+          <motion.div
+            key={spec.label}
+            whileHover={{ backgroundColor: "rgba(139,92,246,0.05)" }}
+            className={`flex items-center gap-3 px-6 py-5 transition-colors ${
+              i < specs.length - 1 ? "border-r border-white/8" : ""
+            } ${i === 1 ? "border-r-0 lg:border-r border-white/8" : ""}`}
+          >
+            <div className="w-8 h-8 rounded-lg bg-[#8b5cf6]/10 flex items-center justify-center text-[#c084fc] border border-[#8b5cf6]/15 shrink-0">
+              {spec.icon}
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-white">{spec.label}</p>
+              <p className="text-[10px] text-white/40 mt-0.5 font-mono">
+                {spec.sub}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </motion.section>
   );
 }
