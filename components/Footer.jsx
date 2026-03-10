@@ -35,10 +35,10 @@ export default function Footer() {
           </p>
           <a
             href="mailto:nehuenmesiasrios@gmail.com"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white px-8 py-3.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity shadow-[0_0_30px_rgba(139,92,246,0.4)]"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white px-4 sm:px-8 py-3.5 rounded-full text-xs sm:text-sm font-semibold hover:opacity-90 transition-opacity shadow-[0_0_30px_rgba(139,92,246,0.4)] w-full sm:w-auto"
           >
-            <Mail className="w-4 h-4" />
-            nehuenmesiasrios@gmail.com
+            <Mail className="w-4 h-4 shrink-0" />
+            <span className="truncate">nehuenmesiasrios@gmail.com</span>
           </a>
         </div>
       </motion.div>
