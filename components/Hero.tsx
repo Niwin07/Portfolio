@@ -109,7 +109,9 @@ export default function Hero() {
           <div className="w-8 h-8 bg-gradient-to-br from-[#8b5cf6] to-[#d946ef] rounded-lg flex items-center justify-center">
             <div className="w-2 h-2 bg-white rounded-sm" />
           </div>
-          <span className="text-base font-bold tracking-tight">N.Mesias</span>
+          <span className="text-base font-bold tracking-tight">
+            Nehuen Mesias
+          </span>
         </motion.div>
 
         {/* Desktop nav */}
